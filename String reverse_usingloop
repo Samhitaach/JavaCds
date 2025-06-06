@@ -1,0 +1,17 @@
+public class Toreverse{
+  public static void main(String[] args) {
+   String STR="MADAM";
+REV(STR);
+  }
+
+  public static void REV(String STR) {
+String reverse=" ";
+int l=STR.length()-1;
+    for(int i=l;i>=0;i--) {
+   reverse=reverse+str.charAt(i) // It is used to retrive character at specific index
+ }
+system.out.println()
+    }
+  }
+
+
