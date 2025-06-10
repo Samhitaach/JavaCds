@@ -1,0 +1,11 @@
+public class Toreverse{
+  public static void main(String[] args) {
+   String STR="MADAM";
+REV_STR_BUFFER(STR);
+  }
+
+  public static void REV_STR_BUFFER(String STR) {
+system.out.println(sb.reverse())
+    }
+  }
+
