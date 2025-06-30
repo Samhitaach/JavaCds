@@ -1,23 +1,23 @@
+
 import java.util.HashMap;
 import java.util.Map;
-public class occurcharacter
-{
-public static void main(String[] args)
-{
-String str= "go to the appropriate exercise page."
-occur(str);
-}
-private static void occur()
-{
-Map<Character,Integer> m= new HashMap<Character,Integer>;
-char[] ch=str.toCharArray(); // Create str char array g, o...
-for(char c:ch)
-{
-if(map.containskey(c)) //If t is occouring second time onwards then 
-map.put(c,map.get(c)+1); //If increase t count to that many times and place character, count
-else
-map.put(c,1);
-}
-System.out.println(map);
-}
-}
+class Main {
+    public static void main(String[] args) {
+    String s="online compilers for Java tAB";
+     String str=s.trim();
+    Map<Character,Integer> map=new HashMap<Character,Integer>();
+    char[] ab=str.toCharArray();
+    for(char c:ab)
+    {
+    if(map.containsKey(c))
+    {
+       map.put(c,map.get(c)+1) ;
+    }
+    else
+    map.put(c,1);
+        
+    }
+    System.out.println("Individual char count"+map);
+    }
+        
+    }
