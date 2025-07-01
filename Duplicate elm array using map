@@ -1,0 +1,19 @@
+import java.util.HashMap;
+import java.util.Map;
+class Main {
+    public static void main(String[] args) {
+    int[] p={6,9,3,7,5,9,3};
+    boolean flag=false;
+    HashMap<Integer,Integer> m= Map<Integer,Integer>();
+    for(int i:m)
+    {
+   
+    {
+    System.out.println("Duplicate element ="+p[i]);
+    flag=true;
+    }
+        
+    }
+    if(flag==false)
+     System.out.println("No Duplicate element found");
+    }
