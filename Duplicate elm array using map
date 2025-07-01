@@ -1,19 +1,24 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
 import java.util.HashMap;
 import java.util.Map;
 class Main {
     public static void main(String[] args) {
     int[] p={6,9,3,7,5,9,3};
     boolean flag=false;
-    HashMap<Integer,Integer> m= Map<Integer,Integer>();
-    for(int i:m)
+    HashMap<Integer,Integer> m= new HashMap<Integer,Integer>();
+    for(int i:p)
     {
-   
+    if(m.containsKey(i))
     {
-    System.out.println("Duplicate element ="+p[i]);
-    flag=true;
+    m.put(i,m.get(i)+1);
+     flag=true;
+    
     }
-        
+    else
+     m.put(i,1);
     }
-    if(flag==false)
+    if(!flag)
      System.out.println("No Duplicate element found");
-    }
+ System.out.println("Array counter"+m);     
+}
