@@ -1,0 +1,41 @@
+public class StringExpander {
+
+    /**
+     * Expands an encoded string where each letter is followed by
+     * a (possibly multi-digit) count.
+     * 
+     * Example: "z2b4" -> "zzbbbb"
+     */
+    public static String expand(String input) {
+        StringBuilder result = new StringBuilder();
+        int i = 0, n = input.length();
+
+        while (i < n) {
+            
+            // 1) Read the character to repeat
+            char ch = input.charAt(i++);
+            
+            // 2) Read the following digits as a single number
+            int count = 0;
+            // - The current character is a digit
+            while (i < n && Character.isDigit(input.charAt(i))) {
+            //Reading “123” all at once means 1×100 + 2×10 + 3×1.
+            // - (input.charAt(i) - '0') converts the character '0'…'9' to its integer value 0…9.
+                count = count * 10 + (input.charAt(i++) - '0');
+            }
+            
+            // 3) Append 'ch' count times
+            for (int j = 0; j < count; j++) {
+                result.append(ch);
+            }
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String in  = "z2b4";
+        String out = expand(in);
+        System.out.println(out);   // prints "zzbbbb"
+    }
+    
+}
