@@ -1,0 +1,37 @@
+public class StringDigitRotator {
+
+    public static String transform(String input) {
+        // Extract digits
+        StringBuilder digitsOnly = new StringBuilder();
+        for (char ch : input.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                digitsOnly.append(ch);
+            }
+        }
+
+        // Rotate digits one position to the right
+        String rotatedDigits = digitsOnly.substring(digitsOnly.length() - 1) + 
+                               digitsOnly.substring(0, digitsOnly.length() - 1);
+
+        // Rebuild string with rotated digits
+        StringBuilder result = new StringBuilder();
+        int digitIndex = 0;
+
+        for (char ch : input.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                result.append(rotatedDigits.charAt(digitIndex));
+                digitIndex++;
+            } else {
+                result.append(ch);
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "f2k5g7nk3";
+        String output = transform(input);
+        System.out.println("Output: " + output);  // Output: f3k7g5nk2
+    }
+}
