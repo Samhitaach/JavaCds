@@ -1,1 +1,17 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+class Main {
+    public static void main(String[] args) {
+   String str1 = "pf=3122g;token=4563ghttt;";
+    Pattern pattern = Pattern.compile("token=([^;]+)");
+Matcher matcher = pattern.matcher(str1);
 
+if (matcher.find()) {
+    System.out.println("Token: " + matcher.group(1));
+}
+    }
+}
+     
+        
