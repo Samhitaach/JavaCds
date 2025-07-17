@@ -3,7 +3,8 @@ public class Toreverse{
    String STR="MADAM";
 REV(STR);
   }
-
+//We should define static functionto call in main method
+//Otherwise non-static method REV(String) cannot be referenced from a static context
   public static void REV(String STR) {
 String reverse=" ";
 int l=STR.length()-1;
