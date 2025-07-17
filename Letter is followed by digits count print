@@ -7,6 +7,8 @@ public class StringExpander {
      * Example: "z2b4" -> "zzbbbb"
      */
     public static String expand(String input) {
+// we are creating a new object using string builder class. Unlike the regular strinng which is immutable.
+// We can modify the string builder object which saves memory
         StringBuilder result = new StringBuilder();
         int i = 0, n = input.length();
 
