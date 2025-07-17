@@ -8,7 +8,7 @@ REV(STR);
 String reverse=" ";
 int l=STR.length()-1;
     for(int i=l;i>=0;i--) {
-   reverse=reverse+str.charAt(i) // It is used to retrive character at specific index
+   reverse=reverse+STR.charAt(i) // It is used to retrive character at specific index
  }
 system.out.println()
     }
