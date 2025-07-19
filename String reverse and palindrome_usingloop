@@ -11,7 +11,8 @@ int l=STR.length()-1;
     for(int i=l;i>=0;i--) {
    reverse=reverse+STR.charAt(i) // It is used to retrive character at specific index
  }
-system.out.println()
+if(STR.equals(reverse))
+        System.out.println("Palindrom string"+ STR);
     }
   }
 
