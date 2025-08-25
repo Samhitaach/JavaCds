@@ -16,6 +16,7 @@ class Main {
     else
      m.put(i,1);
     }
+//It RETURNS A SET OF KEYS FROM MAP
    for(int j:m.keySet())
     {  
         if(m.get(j)>1)
