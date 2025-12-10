@@ -1,0 +1,62 @@
+// Access Super Class Methods and Instance
+// Variables With Super Keyword in Java
+import java.io.*;
+
+// super class
+class helloworld {
+  
+    // instance variable
+    String name = "helloworld is the name";
+    void print()
+    {
+        System.out.println("This is the helloworld class");
+    }
+}
+// derived class
+class GFG1 extends helloworld {
+  
+    // invoking the instance variable of parent class
+    String name = super.name;
+    void print()
+    {
+        // calling the overridden method
+        super.print();
+        System.out.println("This is the GFG1 class");
+      
+        // printing the name
+        System.out.println(name);
+    }
+}
+class GFG {
+    public static void main(String[] args)
+    {
+        // instance of the derived class
+        GFG1 ob = new GFG1();
+      
+        // calling the unoverridden method print
+        ob.print();
+    }
+}
+// Access Super Class Methods and Instance
+// Variables Without Super Keyword in Java
+class Arraylist extends GFG {
+    void hello()
+    {
+        System.out.println("This is the Main class");
+    }
+    public static void main(String args[])
+    {
+        // calling the constructor
+        Arraylist ob = new Arraylist();
+        // calling the inherited name method
+        ob.name();
+    }
+}
+class GFG {
+    GFG()
+    { // constructor of the parent  class
+        System.out.println("This is the constructor");
+    }
+
+    void name() { System.out.println("Hello world"); }
+}
