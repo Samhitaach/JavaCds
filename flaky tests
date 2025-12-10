@@ -1,0 +1,90 @@
+Flaky tests in Selenium are automated tests that sometimes pass and sometimes fail without any changes to the code or test logic. They are a major problem in UI automation because they reduce trust in the test suite and slow down CI/CD pipelines.
+
+Common Causes of Flaky Selenium Tests
+
+
+Timing & Synchronization Issues
+
+Elements not yet loaded or visible when the test tries to interact with them.
+AJAX calls or animations still in progress.
+
+
+
+Dynamic Web Elements
+
+Changing element IDs, classes, or DOM structure between runs.
+
+
+
+Test Data Dependencies
+
+Tests relying on data that changes or is deleted between runs.
+
+
+
+Environment Instability
+
+Network latency, slow servers, or inconsistent test environments.
+
+
+
+Parallel Execution Conflicts
+
+Shared resources or sessions causing race conditions.
+
+
+
+Browser/Driver Inconsistencies
+
+Different browser versions or WebDriver mismatches.
+
+
+
+
+Best Practices to Avoid Flaky Selenium Tests
+1. Use Explicit Waits Instead of Thread.sleep()
+JavaWebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username")));
+element.sendKeys("testuser");
+
+
+Why: Explicit waits wait only as long as needed, reducing timing issues.
+
+
+2. Use Stable Locators
+
+Prefer CSS selectors or XPath that are less likely to change.
+Avoid auto-generated IDs.
+
+JavaBy loginButton = By.cssSelector("button.login-btn");
+
+
+3. Isolate Test Data
+
+Use unique test data for each run.
+Clean up after tests to avoid conflicts.
+
+
+4. Retry Failed Steps (With Caution)
+
+Implement retry logic for known intermittent failures.
+
+Javafor (int i = 0; i < 3; i++) {
+    try {
+        driver.findElement(By.id("submit")).click();
+        break;
+    } catch (Exception e) {
+        Thread.sleep(1000);
+    }
+}
+
+
+5. Run Tests in a Stable Environment
+
+Use Dockerized Selenium Grid or cloud-based services (e.g., BrowserStack, Sauce Labs).
+Keep browser and driver versions in sync.
+
+
+6. Avoid Test Interdependence
+
+Each test should be self-contained and not depend on the state left by another test.
