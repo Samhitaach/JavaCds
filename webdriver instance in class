@@ -1,0 +1,34 @@
+Step :1Create a class & initialize your driver
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class MainDriver
+{
+public static WebDriver driver;
+public static void createInstance()
+{
+System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\Complete selenium\\ChromeDriver\\chromedriver.exe");
+driver = new ChromeDriver();
+driver.manage().window().maximize();
+}
+}
+
+Step :2Create an another class & extend above driver class
+public class Testcase1 extends MainDriver
+{
+public static void url()
+{
+MainDriver.createInstance();
+driver.navigate().to("http://www.way2testing.com");
+}
+}
+
+
+Step :3Create an another class & extend above driver class
+public class TestCase2 extends MainDriver
+{
+public static void getTitle()
+{
+System.out.println(driver.getTitle());
+}
+}
