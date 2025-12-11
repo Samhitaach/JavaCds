@@ -1,3 +1,6 @@
+In Playwright, BrowserContext and Page are essential components for managing browser automation. A BrowserContext represents an isolated browser session, similar to an incognito or private browsing window in a browser. It allows you to create multiple independent sessions within the same browser instance, each with its own cookies, storage, and settings. 
+A Page, on the other hand, is a single tab or window within a BrowserContext.
+
 It will run the test in all three Playwright-supported  browsers, i.e., Chromium, Firefox, and WebKit.
 const { test, expect } = require('@playwright/test');
 
@@ -10,5 +13,330 @@ Run test from terminal
 npx playwright test tests/test.spec.ts  (headless execution)
 Run the test in a specific browser and in headed mode
 npx playwright test tests/test.spec.ts --project chromium --headed   (–"project firefox”  “–project webkit”)
+Using –debug flag
+npx playwright test tests/test.spec.ts --project chromium --debug
 
+Run test in UI mode
 npx playwright test --ui
+
+Capture a Screenshot as homepage file in project folder
+await page.screenshot({ path: 'homepage.png' });
+
+automatically capture screenshots on failure by adding below code in playwright.config.js:
+use: {
+  screenshot: 'only-on-failure', // or 'on', 'off'
+}
+
+record a video of the entire test session by adding below code in playwright.config.js:
+use: {
+  video: 'on' // options: 'on', 'off', 'retain-on-failure'
+}
+
+To enable tracing, use: {
+  trace: 'on-first-retry' // or 'on', 'retain-on-failure'
+}
+
+1. What is Playwright?
+Answer : Playwright is a Node.js library for automating web browsers.
+
+2. Which browsers does Playwright support?
+Answer : Chromium, Firefox, and WebKit.
+
+3. How do you install Playwright?
+Answer : npm install @playwright/test
+
+4. How do you launch a browser in Playwright?
+Answer : const browser = await playwright.chromium.launch();
+
+5. How do you open a new page in Playwright?
+Answer : const page = await browser.newPage();
+
+6. How do you navigate to a URL in Playwright?
+Answer : await page.goto(‘https://example.com');
+
+7. How do you take a screenshot in Playwright?
+Answer : await page.screenshot({ path: ‘screenshot.png’ });
+
+8. How do you click an element in Playwright?
+Answer : await page.click(‘selector’);
+
+9. How do you type into an input field in Playwright?
+Answer : await page.fill(‘selector’, ‘text’);
+
+10. How do you wait for an element to be visible in Playwright?
+Answer : await page.waitForSelector(‘selector’);
+
+11. How do you get the text content of an element in Playwright?
+Answer : const text = await page.textContent(‘selector’);
+
+12. How do you set the viewport size in Playwright?
+Answer : await page.setViewportSize({ width: 1280, height: 720 });
+
+13. How do you emulate a mobile device in Playwright?
+Answer : await page.emulate(devices[‘iPhone 11’]);
+
+14. How do you handle file uploads in Playwright?
+Answer : await page.setInputFiles(‘input[type=”file”]’, ‘path/to/file’);
+
+15. How do you handle alerts in Playwright?
+Answer : page.on(‘dialog’, dialog => dialog.accept());
+
+16. How do you hover over an element in Playwright?
+Answer : await page.hover(‘selector’);
+
+18. How do you simulate a drag-and-drop action in Playwright?
+Answer : await page.dragAndDrop(‘source’, ‘target’);
+
+19. How do you check if an element is visible in Playwright?
+Answer : const isVisible = await page.isVisible(‘selector’);
+
+20. How do you check if an element is enabled in Playwright?
+Answer : const isEnabled = await page.isEnabled(‘selector’);
+
+21. How do you wait for navigation in Playwright?
+Answer : await page.waitForNavigation();
+
+22. How do you select an option from a dropdown in Playwright?
+Answer : await page.selectOption(‘selector’, ‘value’);
+
+23. How do you get the value of an input field in Playwright?
+Answer : const value = await page.inputValue(‘selector’);
+
+24. How do you press a key in Playwright?
+Answer : await page.keyboard.press(‘Enter’);
+
+25. How do you get the current URL in Playwright?
+Answer : const url = page.url();
+
+26. How do you run a script in the browser context in Playwright?
+Answer : await page.evaluate(() => /* script */);
+
+27. How do you capture a PDF of a page in Playwright?
+Answer : await page.pdf({ path: ‘page.pdf’ });
+
+28. How do you handle cookies in Playwright?
+Answer : await page.context().addCookies([{ name: ‘cookie’, value: ‘value’, domain: ‘example.com’ }]);
+
+29. How do you clear cookies in Playwright?
+Answer : await page.context().clearCookies();
+
+30. How do you set a browser context in Playwright?
+Answer : const context = await browser.newContext();
+
+31. How do you close the browser in Playwright?
+Answer : await browser.close();
+
+32. How do you run a headless browser in Playwright?
+Answer : const browser = await playwright.chromium.launch({ headless: true });
+
+33. How do you perform mouse actions in Playwright?
+Answer : await page.mouse.click(x, y);
+
+34. How do you handle authentication in Playwright?
+Answer : await page.authenticate({ username: ‘user’, password: ‘pass’ });
+
+35. How do you get the HTML of an element in Playwright?
+Answer : const html = await page.innerHTML(‘selector’);
+
+36. How do you wait for a specific timeout in Playwright?
+Answer : await page.waitForTimeout(5000);
+
+37. How do you handle multiple pages or tabs in Playwright?
+Answer : const newPage = await context.newPage();
+
+38. How do you save the HAR file in Playwright?
+Answer : await page.routeFromHAR(‘example.har’);
+
+39. How do you handle iframes in Playwright?
+Answer : const frame = await page.frame({ name: ‘frameName’ });
+
+40. How do you check if an element is checked in Playwright?
+Answer : const isChecked = await page.isChecked(‘selector’);
+
+41. How do you set a default timeout for actions in Playwright?
+Answer : page.setDefaultTimeout(10000);
+
+42. How do you capture network requests in Playwright?
+Answer : page.on(‘request’, request => console.log(request.url()));
+
+43. How do you mock network responses in Playwright?
+Answer : await page.route(‘**/api’, route => route.fulfill({ status: 200, body: ‘mocked’ }));
+
+44. How do you block certain URLs in Playwright?
+Answer : await page.route(‘**/*’, route => route.abort());
+
+45. How do you listen to console messages in Playwright?
+Answer : page.on(‘console’, msg => console.log(msg.text()));
+
+46. How do you run tests in parallel in Playwright?
+Answer : Use test.parallel() in the Playwright Test runner.
+
+47. How do you capture video of a test run in Playwright?
+Answer : await context.newPage({ recordVideo: { dir: ‘videos/’ } });
+
+48. How do you assert that an element has a specific attribute in Playwright?
+Answer : await expect(page.locator(‘selector’)).toHaveAttribute(‘attr’, ‘value’);
+
+49. How do you use a proxy server in Playwright?
+Answer : const browser = await playwright.chromium.launch({ proxy: { server: ‘http://proxy.com' } });
+
+50. How do you change the user agent in Playwright?
+Answer : await page.setUserAgent(‘custom-agent’);
+
+51. How do you assert that an element has specific text in Playwright?
+Answer : await expect(page.locator(‘selector’)).toHaveText(‘text’);
+
+Get Sam Atmaramani’s stories in your inbox
+Join Medium for free to get updates from this writer.
+
+Enter your email
+Subscribe
+52. How do you check if an element is disabled in Playwright?
+Answer : const isDisabled = await page.isDisabled(‘selector’);
+
+53. How do you wait for a network response in Playwright?
+Answer : await page.waitForResponse(‘**/api’);
+
+54. How do you handle timeouts for specific actions in Playwright?
+Answer : await page.click(‘selector’, { timeout: 5000 });
+
+55. How do you run a single test in Playwright?
+Answer : test.only(‘test name’, async ({ page }) => { /* test code */ });
+
+56. How do you skip a test in Playwright?
+Answer : test.skip(‘test name’, async ({ page }) => { /* test code */ });
+
+57. How do you mark a test as failing in Playwright?
+Answer : test.fail(‘test name’, async ({ page }) => { /* test code */ });
+
+58. How do you take a screenshot on failure in Playwright?
+Answer : Configure screenshot: ‘only-on-failure’ in the test config.
+
+59. How do you retry a failing test in Playwright?
+Answer : Use retries: 2 in the test config.
+
+60. How do you capture a trace of a test run in Playwright?
+Answer : await page.tracing.start({ screenshots: true, snapshots: true });
+
+61. How do you stop capturing a trace in Playwright?
+Answer : await page.tracing.stop({ path: ‘trace.zip’ });
+
+62. How do you disable JavaScript in Playwright?
+Answer : await page.setJavaScriptEnabled(false);
+
+63. How do you set a geolocation in Playwright?
+Answer : await context.setGeolocation({ latitude: 59.95, longitude: 30.33 });
+
+64. How do you change the timezone in Playwright?
+Answer : await context.setDefaultTimezone(‘Europe/London’);
+
+65. How do you add HTTP headers to requests in Playwright?
+Answer : await page.setExtraHTTPHeaders({ ‘header’: ‘value’ });
+
+66. How do you emulate offline mode in Playwright?
+Answer : await context.setOffline(true);
+
+67. How do you emulate a slow network in Playwright?
+Answer : await context.setNetworkConditions({ download: 100000, upload: 50000, latency: 200 });
+
+68. How do you handle basic authentication in Playwright?
+Answer : await page.authenticate({ username: ‘user’, password: ‘pass’ });
+
+69. How do you handle form submission in Playwright?
+Answer : await page.click(‘form [type=”submit”]’);
+
+70. How do you check if a checkbox is checked in Playwright?
+Answer : const isChecked = await page.isChecked(‘input[type=”checkbox”]’);
+
+71. How do you record a video of a test run in Playwright?
+Answer : Configure recordVideo in the browser context options.
+
+72. How do you add a script tag to a page in Playwright?
+Answer : await page.addScriptTag({ url: ‘https://example.com/script.js' });
+
+73. How do you add a style tag to a page in Playwright?
+Answer : await page.addStyleTag({ content: ‘body { background-color: red; }’ });
+
+74. How do you focus an element in Playwright?
+Answer : await page.focus(‘selector’);
+
+75. How do you blur an element in Playwright?
+Answer : await page.blur(‘selector’);
+
+76. How do you check if an element is editable in Playwright?
+Answer : const isEditable = await page.isEditable(‘selector’);
+
+77. How do you scroll an element into view in Playwright?
+Answer : await page.locator(‘selector’).scrollIntoViewIfNeeded();
+
+78. How do you get the bounding box of an element in Playwright?
+Answer : const box = await page.locator(‘selector’).boundingBox();
+
+79. How do you use Playwright with TypeScript?
+Answer : Install TypeScript and configure Playwright with TypeScript support.
+
+80. How do you integrate Playwright with CI/CD pipelines?
+Answer : Use Playwright test runners and integrate with CI/CD tools like GitHub Actions, Jenkins, or CircleCI.
+
+81. How do you debug Playwright tests?
+Answer : Use test(‘name’, async ({ page }) => { await page.pause(); });
+
+82. How do you capture console logs in Playwright?
+Answer : page.on(‘console’, msg => console.log(msg.text()));
+
+83. How do you handle network failures in Playwright?
+Answer : Use page.on(‘requestfailed’, request => console.log(request.url()));
+
+84. How do you run Playwright tests headlessly?
+Answer : Launch the browser with headless: true.
+
+85. How do you capture network traffic in Playwright?
+Answer : page.on(‘response’, response => console.log(response.url()));
+
+86. How do you set cookies in Playwright?
+Answer : await context.addCookies([{ name: ‘cookie’, value: ‘value’, domain: ‘example.com’ }]);
+
+87. How do you delete cookies in Playwright?
+Answer : await context.clearCookies();
+
+88. How do you get cookies in Playwright?
+Answer : const cookies = await context.cookies();
+
+89. How do you set local storage in Playwright?
+Answer : await page.evaluate(() => localStorage.setItem(‘key’, ‘value’));
+
+90. How do you get local storage in Playwright?
+Answer : const value = await page.evaluate(() => localStorage.getItem(‘key’));
+
+91. How do you capture network request bodies in Playwright?
+Answer : Use page.on(‘request’, request => request.postData());
+
+92. How do you handle multiple downloads in Playwright?
+Answer : await page.waitForEvent(‘download’);
+
+93. How do you handle popups in Playwright?
+Answer : page.on(‘popup’, popup => /* handle popup */);
+
+94. How do you measure page load time in Playwright?
+Answer : Use performance timing metrics via page.evaluate(() => performance.timing);
+
+95.How do you capture browser logs in Playwright?
+Answer : page.on(‘console’, msg => console.log(msg.text()));
+
+96.How do you handle redirects in Playwright?
+Answer : Use page.on(‘response’, response => response.url());
+
+97. How do you handle CSP (Content Security Policy) in Playwright?
+Answer : Use page.setExtraHTTPHeaders({ ‘Content-Security-Policy’: ‘default-src “self”’ });
+
+98. How do you handle service workers in Playwright?
+Answer : await context.serviceWorkers();
+
+99. How do you check the status code of a network response in Playwright?
+Answer : page.on(‘response’, response => response.status());
+
+100. How do you set viewport size in Playwright?
+Answer : await page.setViewportSize({ width: 1280, height: 720 });
+
+101. How do you capture HTTP headers in Playwright?
+Answer : page.on(‘request’, request => console.log(request.headers()));
