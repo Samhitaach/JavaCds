@@ -1,7 +1,24 @@
 In Playwright, BrowserContext and Page are essential components for managing browser automation. A BrowserContext represents an isolated browser session, similar to an incognito or private browsing window in a browser. It allows you to create multiple independent sessions within the same browser instance, each with its own cookies, storage, and settings. 
 A Page, on the other hand, is a single tab or window within a BrowserContext.
 
+Feature / Tool	Playwright	Selenium	Cypress
+Language Support	JS/TS, Python, .Net, Java	JS, Python, Java, C#, Ruby, etc.	JavaScript & TypeScript only
+Browser Support	Chromium, Firefox, WebKit	All major  browsers	Chromium-based (Chrome, Edge), Firefox
+Mobile Emulation	Built-in	Requires setup	Limited
+Parallel Execution	Built-in	Manual with Grid	Built-in
+Test Speed	Very fast (headless, parallel)	Slower (depends on driver/browser)	Fast (in-browser execution)
+Auto-Waiting	Yes	No	Yes
+UI for Debugging	Playwright Inspector	(use browser tools)	Built-in Test Runner UI
+CI/CD Integration	Simple	Painless	straightforward
+Network Control	Mock & intercept requests	Limited (Selenium 4+)	Some support
+Screenshots & Video	Built-in	Requires 3rd party tools	Built-in
+Learning Curve	Moderate	Moderate to steep	Easy
+
 It will run the test in all three Playwright-supported  browsers, i.e., Chromium, Firefox, and WebKit.
+This line imports the test and expect functions from the Playwright Test library.
+test: Used to define and run a test case.
+expect: This is used to make assertions (i.e., checks or verifications).
+
 const { test, expect } = require('@playwright/test');
 
 test('check title on Google', async ({ page }) => {
