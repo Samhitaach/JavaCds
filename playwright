@@ -1,0 +1,12 @@
+It will run the test in all three Playwright-supported  browsers, i.e., Chromium, Firefox, and WebKit.
+const { test, expect } = require('@playwright/test');
+
+test('check title on Google', async ({ page }) => {
+  await page.goto('https://www.google.com');
+  await expect(page).toHaveTitle(/Google/);
+});
+
+Run test from terminal
+npx playwright test tests/test.spec.ts  (headless execution)
+Run the test in a specific browser and in headed mode
+npx playwright test tests/test.spec.ts --project chromium --headed   (–"project firefox”  “–project webkit”)
