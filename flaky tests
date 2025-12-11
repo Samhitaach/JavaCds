@@ -78,6 +78,17 @@ Javafor (int i = 0; i < 3; i++) {
     }
 }
 
+WebElement signInButton = driver.findElement(By.id("nav-link-accountList"));
+
+if (signInButton.isDisplayed() && signInButton.isEnabled()) {
+
+    signInButton.click();
+
+} else {
+
+    System.out.println("Element not interactable");
+
+}
 
 5. Run Tests in a Stable Environment
 
