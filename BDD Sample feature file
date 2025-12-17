@@ -1,0 +1,33 @@
+Feature: User API authentication and operations
+
+  Background:
+    Given the API base URI is set
+
+  @Auth @Positive
+  Scenario: Successful login with valid credentials
+    When I authenticate with username "validUser" and password "validPass"
+    Then the response status code should be 200
+    And the JSON field "token" should be present
+    And the JSON field "error" should be null
+
+  @Auth @Negative
+  Scenario: Login fails with invalid credentials
+    When I authenticate with username "invalidUser" and password "wrongPass"
+    Then the response status code should be 401
+    And the JSON field "error" should be "Invalid credentials"
+
+  @GetUser @Positive
+  Scenario: Get user details with valid token
+    Given I have a valid auth token
+    When I send a GET request to "/users/123"
+    Then the response status code should be 200
+    And the JSON field "id" should be "123"
+    And the JSON field "status" should be "ACTIVE"
+
+  @PostUser @Negative
+  Scenario: Create user with invalid payload
+    Given I have a valid auth token
+    And I set request body from "invalid_user.json"
+    When I send a POST request to "/users"
+    Then the response status code should be 400
+    And the JSON field "errorCode" should be "VALIDATION_ERROR"
