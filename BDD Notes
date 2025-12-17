@@ -7,3 +7,8 @@ To categorize and arrange the scenarios and features in a feature file, Cucumber
 What is the purpose of a Cucumber tag?
 A Cucumber tag is used to assign metadata to a scenario or feature so that it may be filtered and put through particular tests. In addition to grouping related scenarios, and marking them as skipped or pending, tags can also be used to prevent some scenarios from being executed.
 
+What is a hook in Cucumber?
+A hook in Cucumber is a code block that can be added before or after a scenario or feature. With the support of hooks, you can carry out setup and teardown actions before and following each scenario or feature. According to their placement, hooks are defined in a separate file and are automatically run either before or after each scenario or feature.
+
+What is a data table in Cucumber?
+A data table in Cucumber is a way to deliver a set of data to a Step in a Scenario in a tabular manner. In Cucumber, a data table is defined by a series of pipes (|) to split the columns and hyphens (-) that divide the header row from the data rows. For instance, the following data table has two rows of data and the following two columns: "Username" and "Password":
