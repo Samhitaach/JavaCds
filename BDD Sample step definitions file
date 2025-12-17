@@ -1,0 +1,174 @@
+public class ApiSteps {
+
+    private Response response;
+    private RequestSpecification request;
+    private String baseUri = "https://api.example.com";
+    private String token;
+
+    @Given("the API base URI is set")
+    public void setBaseUri() {
+        RestAssured.baseURI = baseUri;
+        request = given().contentType(ContentType.JSON);
+    }
+
+    @When("I authenticate with username {string} and password {string}")
+    public void authenticate(String username, String password) {
+        response = given()
+                .contentType(ContentType.JSON)
+                .body(Map.of("username", username, "password", password))
+                .post("/auth/login");
+    }
+
+    @Then("the response status code should be {int}")
+    public void verifyStatusCode(int statusCode) {
+        response.then().statusCode(statusCode);
+    }
+
+    @Then("the JSON field {string} should be present")
+    public void jsonFieldPresent(String jsonPath) {
+        response.then().body(jsonPath, notNullValue());
+    }
+
+    @Then("the JSON field {string} should be null")
+    public void jsonFieldNull(String jsonPath) {
+        response.then().body(jsonPath, nullValue());
+    }
+
+    @Then("the JSON field {string} should be {string}")
+    public void jsonFieldEquals(String jsonPath, String expected) {
+        response.then().body(jsonPath, equalTo(expected));
+    }
+
+    @Given("I have a valid auth token")
+    public void iHaveValidAuthToken() {
+        Response authResponse = given()
+                .contentType(ContentType.JSON)
+                .body(Map.of("username", "validUser", "password", "validPass"))
+                .post("/auth/login");
+
+        token = authResponse.jsonPath().getString("token");
+        request = given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + token);
+    }
+
+    @When("I send a GET request to {string}")
+    public void sendGet(String path) {
+        response = request.when().get(path);
+    }
+
+    @Given("I set request body from {string}")
+    public void setRequestBodyFromFile(String fileName) throws IOException {
+        String body = Files.readString(Paths.get("src/test/resources/payloads/" + fileName));
+        request = request.body(body);
+    }
+
+    @When("I send a POST request to {string}")
+    public void sendPost(String path) {
+        response = request.when().post(path);
+    }
+}
+Using Scenario Outline:
+
+Scenario Outline: Add items to cart
+  Given I am on the product page
+  When I add <quantity> of <product> to cart
+  Then I should see <total> in cart
+
+Examples:
+  | quantity | product | total |
+  | 1              | Phone   | 500   |
+  | 2            | Laptop  | 2000  |
+
+Use JSON or XML to represent complex data structures.
+
+Scenario Outline: Validate user data
+  Given I am on the user page
+  When I enter <user_data>
+  Then I should see <message>
+
+Examples:
+  | user_data                     | message    |
+  | { "name": "John", "age": 30 } | Welcome John |
+  | { "name": "Jane", "age": 25 } | Welcome Jane |
+
+Using data in table format:
+
+Scenario: Create user and verify details
+  When I create a user with details
+    | firstName | lastName | email              | role  |
+    | Ram       | Kumar    | ram@example.com    | ADMIN |
+  Then the created user details should be shown correctly
+
+public class UserSteps {
+
+    // Simple shared state between steps
+    private Map<String, String> userData;
+    private Response response;
+
+    @When("I create a user with details")
+    public void i_create_a_user_with_details(DataTable table) {
+        // Convert single-row table to Map
+        userData = table.asMaps(String.class, String.class).get(0);
+
+        // Use it for API/UI
+        response = given()
+                .contentType(ContentType.JSON)
+                .body(userData)
+                .post("/users");
+    }
+
+    @Then("the created user details should be shown correctly")
+    public void the_created_user_details_should_be_shown_correctly() {
+        response.then().statusCode(201);
+        response.then().body("firstName", equalTo(userData.get("firstName")));
+        response.then().body("lastName", equalTo(userData.get("lastName")));
+        response.then().body("email", equalTo(userData.get("email")));
+    }
+}
+
+CSV file → List<Map> (or POJO) → shared context
+CSV file as
+firstName,lastName,email,role
+Ram,Kumar,ram@example.com,ADMIN
+Sita,Devi,sita@example.com,USER
+
+Using simple BufferedReader to build a List<Map<String,String>>:
+
+@Given("I load users from csv file {string}")
+public void i_load_users_from_csv_file(String fileName) throws IOException {
+    Path path = Paths.get("src/test/resources/testdata/", fileName);
+
+    List<Map<String, String>> users = new ArrayList<>();
+    try (BufferedReader br = Files.newBufferedReader(path)) {
+        String headerLine = br.readLine();
+        String[] headers = headerLine.split(",");
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            Map<String, String> row = new HashMap<>();
+            for (int i = 0; i < headers.length; i++) {
+                row.put(headers[i], values[i]);
+            }
+            users.add(row);
+        }
+    }
+    scenarioContext.set("usersData", users);
+}
+@When("I create all csv users")
+public void i_create_all_csv_users() {
+    List<Map<String, String>> users =
+            scenarioContext.get("usersData", List.class);
+    List<Response> responses = new ArrayList<>();
+
+    for (Map<String, String> user : users) {
+        Response resp = given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .post("/users");
+        responses.add(resp);
+    }
+    scenarioContext.set("userResponses", responses);
+}
+
