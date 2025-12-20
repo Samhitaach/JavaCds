@@ -1,0 +1,43 @@
+playwright-sample-project/
+│
+├── src/                         # Source code
+│   ├── advantage/               # UI Automation (Advantage Online Shopping)
+│   │   ├── constants/           # Constants & test data mappings
+│   │   ├── pages/               # Page Object Models
+│   │   └── steps/               # Step actions classes
+│   │
+│   ├── API/                     # API Automation
+│   │   ├── REST/                # REST API tests & helpers
+│   │   │   ├── constants/       # REST-specific constants
+│   │   │   └── steps/           # REST-specific step actions classes
+│   │   │
+│   │   └── SOAP/                # SOAP API tests & helpers
+│   │       ├── constants/       # SOAP-specific constants
+│   │       └── steps/           # SOAP-specific step actions classes
+│   │
+│   ├── database/                # Database interaction utilities
+│   │       ├── constants/       # Database-specific constants
+│   │       └── steps/           # Database-specific step actions classes
+│   ├── framework/               # Core framework utilities
+│   └── resources/               # Shared resources
+│       ├── API/                 # API payloads
+│       ├── data/                # Test data files
+│       └── pdf/                 # PDF files for validation
+│
+├── tests/                       # Test specifications (.spec.ts)
+│
+├── test-results/                # Output of test executions
+│   ├── downloads/               # Downloaded files during tests
+│   ├── failure/                 # Failure screenshots & artifacts
+│   ├── logs/                    # Execution logs
+│   ├── pdf/                     # PDF comparison results
+│   ├── report/                  # Allure / HTML reports
+│   └── results/                 # Playwright HTML results
+│
+├── .env                         # Environment variables
+├── .eslintignore                # ESLint ignore rules
+├── .eslintrc.json               # ESLint configuration
+├── .gitignore                   # Git ignore rules
+├── package.json                 # Project dependencies & scripts
+├── package-lock.json            # Lock file
+└── playwright.config.ts         # Playwright configuration
