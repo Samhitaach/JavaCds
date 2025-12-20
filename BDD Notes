@@ -1,15 +1,27 @@
 What is the difference between a Background and a Scenario Outline in Cucumber?
-A Background is a set of steps that every scenario in a feature file shares. The same scenario is run several times with varying input values using a scenario outline. A Scenario Outline can be used several times to run the same scenario with different input data sets. However the Background section can only be used once per feature file.
+A Background is a set of steps that every scenario in a feature file shares. 
+The same scenario is run several times with varying input values using a scenario outline.
+A Scenario Outline can be used several times to run the same scenario with different input data sets.
+However the Background section can only be used once per feature file.
 
 What is a tag in Cucumber?
-To categorize and arrange the scenarios and features in a feature file, Cucumber uses tags, which are labels. A tag is a keyword that is preceded by the "@" symbol and the tag name. For instance, the tag "@smokeTest" might be used to identify features or scenarios that are part of a smoke test suite.
+To categorize and arrange the scenarios and features in a feature file, Cucumber uses tags, which are labels. 
+A tag is a keyword that is preceded by the "@" symbol and the tag name. 
+For instance, the tag "@smokeTest" might be used to identify features or scenarios that are part of a smoke test suite.
 
 What is the purpose of a Cucumber tag?
-A Cucumber tag is used to assign metadata to a scenario or feature so that it may be filtered and put through particular tests. In addition to grouping related scenarios, and marking them as skipped or pending, tags can also be used to prevent some scenarios from being executed.
+A Cucumber tag is used to assign metadata to a scenario or feature so that it may be filtered and put through particular tests. 
+In addition to grouping related scenarios, and marking them as skipped or pending, tags can also be used to prevent 
+some scenarios from being executed.
 
 What is a hook in Cucumber?
-A hook in Cucumber is a code block that can be added before or after a scenario or feature. With the support of hooks, you can carry out setup and teardown actions before and following each scenario or feature. According to their placement, hooks are defined in a separate file and are automatically run either before or after each scenario or feature.
-In Cucumber, the hook is the block of code which can be defined with each scenario in step definition file by using the annotation @Before and @After. 
+A hook in Cucumber is a code block that can be added before or after a scenario or feature. 
+With the support of hooks, you can carry out setup and teardown actions before and following each scenario or feature. 
+According to their placement, hooks are defined in a separate file and are automatically run either before or after each scenario or feature.
+In Cucumber, the hook is the block of code which can be defined with each scenario in step definition file by using 
+the annotation @Before and @After. 
 
 What is a data table in Cucumber?
-A data table in Cucumber is a way to deliver a set of data to a Step in a Scenario in a tabular manner. In Cucumber, a data table is defined by a series of pipes (|) to split the columns and hyphens (-) that divide the header row from the data rows. For instance, the following data table has two rows of data and the following two columns: "Username" and "Password":
+A data table in Cucumber is a way to deliver a set of data to a Step in a Scenario in a tabular manner. 
+In Cucumber, a data table is defined by a series of pipes (|) to split the columns and hyphens (-) that divide the header row from the data rows.
+For instance, the following data table has two rows of data and the following two columns: "Username" and "Password":
