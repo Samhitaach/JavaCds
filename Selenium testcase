@@ -1,4 +1,61 @@
- public  void testCase01(){
+import com.tsb.framework.driver.Driver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.*;
+import java.time.Duration;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+public class LoginPage {
+    private WebDriver d() { return Driver.get(); }
+    private WebDriverWait wait() { return new WebDriverWait(d(), Duration.ofSeconds(15)); }
+    private By loginLink()      { return By.linkText("Log in"); }
+    private By loginIframe()    { return By.cssSelector("iframe[title='Login']"); } // adjust if needed
+    private By emailField()     { return By.cssSelector("input[type='email'], #Email"); }
+    private By passwordField()  { return By.cssSelector("input[type='password'], #Password"); }
+    private By submitButton()   { return By.cssSelector("button[type='submit'], input[type='submit']"); }
+    private By errorBanner()    { return By.cssSelector(".error, .validation-summary-errors"); }
+    private By dashboardMarker(){ return By.cssSelector("[data-test='user-menu'], a[title='My Trade Me']"); }
+    public void openHome() {
+        d().get("https://www.tmsandbox.co.nz/");
+        d().manage().window().maximize();
+        wait().until(presenceOfElementLocated(By.tagName("body")));
+    }
+    public void openLoginDialog() {
+        WebElement link = wait().until(elementToBeClickable(loginLink()));
+        new Actions(d()).moveToElement(link).pause(Duration.ofMillis(100)).click().perform();
+        switchToLoginFrameIfPresent();
+    }
+    public void fillCredentials(String email, String password) {
+        switchToLoginFrameIfPresent();
+        WebElement emailEl = wait().until(elementToBeClickable(emailField()));
+        emailEl.clear(); emailEl.sendKeys(email);
+        WebElement pwdEl = wait().until(elementToBeClickable(passwordField()));
+        pwdEl.clear(); pwdEl.sendKeys(password);
+    }
+    public void submitLogin() {
+        switchToLoginFrameIfPresent();
+        wait().until(elementToBeClickable(submitButton())).click();
+    }
+    public boolean isLoggedIn() {
+        backToDefault();
+        try { wait().until(presenceOfElementLocated(dashboardMarker())); return true; }
+        catch (TimeoutException e) { return false; }
+    }
+    public boolean hasLoginError() {
+        try { wait().until(visibilityOfElementLocated(errorBanner())); return true; }
+        catch (TimeoutException e) { return false; }
+    }
+    private void switchToLoginFrameIfPresent() {
+        d().switchTo().defaultContent();
+        try { WebElement frame = wait().until(presenceOfElementLocated(loginIframe()));
+              d().switchTo().frame(frame);
+        } catch (TimeoutException ignored) {}
+    }
+    public void backToDefault() {
+        try { d().switchTo().defaultContent(); } catch (Exception ignored) {}
+    }
+}
+
+public  void testCase01(){
 
         System.out.println("Start Test case: testCase01: Verify the Leetcode Homepage URL");
         
