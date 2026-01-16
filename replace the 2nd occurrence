@@ -1,0 +1,16 @@
+public class ReplaceSecondGood {
+    public static void main(String[] args) {
+        String text = "very good morning good afternoon good night";
+        String target = "good";
+        String replacement = "bad";
+        
+        int first = text.indexOf(target);
+        int second = text.indexOf(target, first + 1);
+        
+        if (second != -1) {
+            String result = text.substring(0, second) + replacement + 
+                           text.substring(second + target.length());
+            System.out.println(result);
+        }
+    }
+}
