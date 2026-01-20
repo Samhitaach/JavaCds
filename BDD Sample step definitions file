@@ -10,7 +10,7 @@ public class ApiSteps {
         RestAssured.baseURI = baseUri;
         request = given().contentType(ContentType.JSON);
     }
-
+for auth token
     @When("I authenticate with username {string} and password {string}")
     public void authenticate(String username, String password) {
         response = given()
@@ -23,6 +23,7 @@ public class ApiSteps {
     public void verifyStatusCode(int statusCode) {
         response.then().statusCode(statusCode);
     }
+
 
     @Then("the JSON field {string} should be present")
     public void jsonFieldPresent(String jsonPath) {
@@ -45,7 +46,7 @@ public class ApiSteps {
                 .contentType(ContentType.JSON)
                 .body(Map.of("username", "validUser", "password", "validPass"))
                 .post("/auth/login");
-
+for bearer token
         token = authResponse.jsonPath().getString("token");
         request = given()
                 .contentType(ContentType.JSON)
