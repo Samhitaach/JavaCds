@@ -1,3 +1,53 @@
+ package steps;
+import io.cucumber.java.en.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+(String, Integer, Float, Boolean, Date, etc.) 
+public class DataTypesSteps {
+
+    private int intValue;
+    private float floatValue;
+    private boolean boolValue;
+    private Date dateValue;
+
+    @Given("I have an integer value {int}")
+    public void i_have_an_integer_value(Integer value) {
+        this.intValue = value;
+    }
+
+    @Given("I have a float value {float}")
+    public void i_have_a_float_value(Float value) {
+        this.floatValue = value;
+    }
+
+    @Given("I have a boolean value {word}")
+    public void i_have_a_boolean_value(String value) {
+        // Convert string to boolean safely
+        this.boolValue = Boolean.parseBoolean(value);
+    }
+
+    @Given("I have a date value {string}")
+    public void i_have_a_date_value(String dateStr) {
+        try {
+            // Parse date in yyyy-MM-dd format
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            this.dateValue = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Use yyyy-MM-dd", e);
+        }
+    }
+
+    @Then("I print all values")
+    public void i_print_all_values() {
+        System.out.println("Integer: " + intValue);
+        System.out.println("Float: " + floatValue);
+        System.out.println("Boolean: " + boolValue);
+        System.out.println("Date: " + dateValue);
+    }
+}
+
 public class ApiSteps {
 
     private Response response;
